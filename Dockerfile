@@ -21,8 +21,8 @@ WORKDIR /app
 # Copy application code
 COPY . .
 
-# Install dependencies (ignoring platform reqs just in case)
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+# Install dependencies (skipping scripts to avoid the Excel package crash)
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts
 
 # Start the server
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
