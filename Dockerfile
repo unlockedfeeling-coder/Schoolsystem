@@ -20,7 +20,5 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts
 
-# Run migrations automatically
-RUN php artisan migrate --force
-
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+# This line runs the migration first, then starts the server
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
