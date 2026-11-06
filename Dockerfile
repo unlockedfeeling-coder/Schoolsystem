@@ -20,4 +20,5 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts
 
-CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --no-interaction && php artisan serve --host=0.0.0.0 --port=$PORT"]
+# This line creates the .env file so artisan commands don't crash, then runs migrations
+CMD ["sh", "-c", "cp .env.example .env && php artisan config:clear && php artisan migrate --no-interaction && php artisan serve --host=0.0.0.0 --port=$PORT"]
